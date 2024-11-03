@@ -20,5 +20,5 @@ How the project works:
 - The clean part-000000 will then be passed to Embedding.scala, where Word2Vec will read part-00000's contents and convert it into token embeddings.
 - The output of Word2Vec will then be placed in a file called answer.
 - This file will then be used in SlidingWindow.scala.
-- Inside SlidingWindow.scala, the token embeddings created from Word2Vec will be converted to RDD, then fed into the model.
-- The model is then trained and saved inside trained_model.zip.
+- Inside SlidingWindow.scala, the token embeddings created from Word2Vec will go through the SlidingWindow algorithm, then converted into RDD.
+- The model is then trained and test, as well as saved inside trained_model.zip.
