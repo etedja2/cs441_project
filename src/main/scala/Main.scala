@@ -1,5 +1,6 @@
 package org.cs441homework2.com
 
+import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
@@ -66,8 +67,9 @@ object Main extends LazyLogging {
   }
 
   def main(args: Array[String]): Unit = {
-    val inputPath = args(0)
-    val outputPath = args(1)
+    val config = ConfigFactory.load()
+    val inputPath = config.getString("input.filePath")
+    val outputPath = config.getString("output.outputPath")
 
     deleteDirectory(outputPath)
     Tokenization.tokenizationMR(inputPath, outputPath)

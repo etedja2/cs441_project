@@ -32,5 +32,6 @@ libraryDependencies ++= Seq(
   "org.nd4j" % "nd4j-native-platform" % dl4jVersion,
 
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
+  "com.typesafe" % "config" % "1.4.3", // Configuration Library
   "ch.qos.logback" % "logback-classic" % "1.5.6" // Logback for logging backend
 )
