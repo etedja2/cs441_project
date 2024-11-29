@@ -34,26 +34,15 @@ libraryDependencies ++= Seq(
 
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
   "com.typesafe" % "config" % "1.4.3", // Configuration Library
-  "ch.qos.logback" % "logback-classic" % "1.5.6" // Logback for logging backend
+  "ch.qos.logback" % "logback-classic" % "1.5.6", // Logback for logging backend
+
+  "com.typesafe.akka" %% "akka-actor" % "2.8.8",
+  "com.typesafe.akka" %% "akka-http" % "10.5.3",
+  "com.typesafe.akka" %% "akka-stream" % "2.8.8",
+  "com.typesafe.akka" %% "akka-http-spray-json" % "10.5.3"
 )
 
-assemblyMergeStrategy := {
-  case PathList("META-INF", "path.to.some.library.properties") => MergeStrategy.concat
-
-  // Discard classes from hadoop-client-api that conflict with hadoop-yarn-common
-  case PathList("org", "apache", "hadoop", "yarn", "webapp", "view", xs @ _*) =>
-    MergeStrategy.discard // Discard all conflicting classes from this package
-
-  // Keep classes from the hadoop-yarn-common version
-  case PathList("org", "apache", "hadoop", "yarn", "webapp", "view", xs @ _*) =>
-    MergeStrategy.first // Keep the first occurrence (from hadoop-yarn-common)
-
-  // Handle other potential conflicts if necessary
-  case PathList("META-INF", "versions", "9", "someName.class") => MergeStrategy.discard
-
-  // Concatenate META-INF/services files, if they exist
-  case PathList("META-INF", "services", xs @ _*) => MergeStrategy.concat
-
-  // Default merge strategy for any other cases
-  case x => MergeStrategy.defaultMergeStrategy(x)
+ThisBuild / assemblyMergeStrategy := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
 }

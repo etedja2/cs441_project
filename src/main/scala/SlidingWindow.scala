@@ -7,6 +7,7 @@ import org.apache.spark.api.java.{JavaRDD, JavaSparkContext}
 import org.deeplearning4j.datasets.iterator.IteratorDataSetIterator
 import org.deeplearning4j.nn.api.OptimizationAlgorithm
 import org.deeplearning4j.nn.conf.layers.{DenseLayer, OutputLayer}
+import org.deeplearning4j.nn.conf.Updater
 import org.deeplearning4j.nn.conf.{MultiLayerConfiguration, NeuralNetConfiguration}
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.deeplearning4j.nn.weights.WeightInit
@@ -20,6 +21,7 @@ import org.nd4j.linalg.activations.Activation
 import org.nd4j.linalg.dataset.DataSet
 import org.nd4j.linalg.factory.Nd4j
 import org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction
+import org.nd4j.linalg.learning.config.Adam
 
 import java.util
 import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
@@ -58,6 +60,7 @@ object TransformerModel extends LazyLogging {
     // Create the model here
     val conf:MultiLayerConfiguration = new NeuralNetConfiguration.Builder()
       .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
+      .updater(new Adam(0.001))
       .list()
       .layer(0, new DenseLayer.Builder().nIn(inputSize).nOut(hiddenSize)
         .weightInit(WeightInit.XAVIER)
@@ -157,7 +160,6 @@ object SlidingWindow extends LazyLogging {
     model.setListeners(new ScoreIterationListener(10))
     System.out.println("Current Learning Rate: " + model.getLearningRate(1))
 
-
     // Train the model
     sparkModel.fit(rddDataSet)
 
@@ -168,6 +170,6 @@ object SlidingWindow extends LazyLogging {
     System.out.println("Total executors: " + sc.getExecutorMemoryStatus.size)
     sc.stop()
 
-    logger.debug("Exiting SlidingWindow...")
+    logger.info("Exiting SlidingWindow...")
   }
 }

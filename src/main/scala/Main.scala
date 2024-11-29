@@ -73,14 +73,10 @@ object Main extends LazyLogging {
 
     deleteDirectory(outputPath)
     Tokenization.tokenizationMR(inputPath, outputPath)
+    removeKeyFromFile(outputPath + "part-00000") // Modify part-00000 to exclude the keys and keep the values
+    Embedding.runEmbedding(outputPath + "part-00000", outputPath + "answer") // Use part-00000 and feed it into Word2VecModel
+    SlidingWindow.startOfProcess(outputPath + "answer", outputPath) // Model is created here, along with SlidingWindow algorithm
 
-    // Modify part-00000 to exclude the keys and keep the values
-    removeKeyFromFile(outputPath + "part-00000")
-
-    // Use part-00000 and feed it into Word2VecModel
-    // Refer to Embedding.scala for this function
-    Embedding.runEmbedding(outputPath + "part-00000", outputPath + "answer")
-
-    SlidingWindow.startOfProcess(outputPath + "answer", outputPath)
+//    GenerateSentence.startingPoint(outputPath, "what is time horizon") // Algorithm that generates the sentence from model
   }
 }
