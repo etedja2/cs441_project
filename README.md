@@ -10,7 +10,8 @@ How to run project:
 - After running Option 2, please go to Postman and make a POST request to http://localhost:8080/api/user
 - Please include a body of JSON format in the HTTP Request. Below is an example of a valid HTTP request to my Akka implementation. Note that only the query parameter is accepted in the model.
 
-$ POST http://localhost:8080/api/user\n
+Example:
+POST http://localhost:8080/api/user\n
 Body content (JSON format): {"query": "love is in the air"}
 
 How to run tests:
