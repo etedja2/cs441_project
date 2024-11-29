@@ -11,7 +11,7 @@ How to run project:
 - Please include a body of JSON format in the HTTP Request. Below is an example of a valid HTTP request to my Akka implementation. Note that only the query parameter is accepted in the model.
 
 Example:
-POST http://localhost:8080/api/user\n
+POST http://localhost:8080/api/user
 Body content (JSON format): {"query": "love is in the air"}
 
 How to run tests:
