@@ -8,11 +8,9 @@ How to run project:
 - Type "sbt run" in the console/terminal.
 - The program will prompt you to choose between Option 1 (Create and Train Model) and Option 2 (Run Akka Server with Model)
 - After running Option 2, please go to Postman and make a POST request to http://localhost:8080/api/user
-- Please include a body of JSON format in the HTTP Request. Below is an example of a valid HTTP request to my Akka implementation:
-- Note that only the query parameter is accepted in the model.
+- Please include a body of JSON format in the HTTP Request. Below is an example of a valid HTTP request to my Akka implementation. Note that only the query parameter is accepted in the model.
 
 POST http://localhost:8080/api/user
-
 {
     "query": "love is in the air"
 }
